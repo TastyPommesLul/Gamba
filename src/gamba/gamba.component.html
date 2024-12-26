@@ -1,0 +1,10 @@
+<button (click)="onGamble()" class="gamba-button">Let The Gamba Commence</button>
+
+<input type="number" name="name" [(ngModel)]="give" style="width: 50px">
+
+<button (click)="allIn()">All In</button>
+
+{{ balance }}
+{{ error == "" ? "" : error }}
+
+<app-eastah-egg />
