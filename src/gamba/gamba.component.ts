@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {EastahEggComponent} from '../eastah-egg/eastah-egg.component';
+import {Utils} from '../Utils';
 
 @Component({
   selector: 'app-gamba',
@@ -15,25 +16,30 @@ export class GambaComponent {
   balance = 500;
 
   give = this.balance / 10;
+  step = 50;
+
 
   error = "";
 
-  onGamble(): void {
-    let chance = Math.random() * 10;
+  async onGamble(): Promise<void> {
+    let chance = Math.ceil(Math.random() * 100);
+    await Utils.delay(500);
     if (this.give <= this.balance) {
-      this.error = ""
-      if (chance > 5) {
-        console.log(chance.toPrecision(6));
+      if (chance > 60) {
+        console.log(chance);
         this.balance += this.give * 2;
-        console.log(this.give);
+      }
+      else if (chance >= 99) {
+        this.balance += this.give * 10;
+        this.error = "You Hit The JackPot!"
       } else {
-        console.log(chance.toPrecision(6));
+        console.log(chance);
         this.balance -= this.give / 2;
-        console.log(this.give);
       }
     } else if (this.give > this.balance) {
-      this.error = "Set Coins to your Balance or You Don't Have Enough Coins!"
+      this.error = "Coins Have been set to your Balance Because You Can't Gamble More Than You Have!";
       this.give = this.balance
+      await this.onGamble();
     }
   }
 
@@ -41,5 +47,20 @@ export class GambaComponent {
     this.give = this.balance
   }
 
-  protected readonly document = document;
+  addCoins(): void {
+    this.give += this.step;
+  }
+
+  removeCoins(): void {
+    this.give -= this.step;
+  }
+
+  addStep(): void {
+    this.step += 25;
+  }
+
+  removeStep(): void {
+    this.step -= 25;
+  }
+
 }

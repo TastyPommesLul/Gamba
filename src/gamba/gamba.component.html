@@ -1,10 +1,35 @@
+Balance: {{ balance.toPrecision() }}
+
+<br>
+<br>
+<br>
+<label for="give">How Much to Gamble</label>
+<input type="number" name="name" id="give" [(ngModel)]="give" style="width: 50px">
+
+
+<br>
+<br>
+<br>
+<label for="step">Step</label>
+<input type="number" name="step" id="step" [(ngModel)]="step" style="width: 50px">
+
+
+
+<button (click)="allIn()"
+        (window:keydown.control.enter)="allIn()"
+        (window:keydown.enter)="onGamble()"
+        (window:keydown.arrowUp)="addCoins()"
+        (window:keydown.arrowDown)="removeCoins()"
+        (window:keydown.control.arrowUp)="addStep()"
+        (window:keydown.control.arrowDown)="removeStep()">All In</button>
+<br>
+<br>
+<br>
 <button (click)="onGamble()" class="gamba-button">Let The Gamba Commence</button>
+<br>
+<br>
+<br>
 
-<input type="number" name="name" [(ngModel)]="give" style="width: 50px">
-
-<button (click)="allIn()">All In</button>
-
-{{ balance }}
 {{ error == "" ? "" : error }}
 
 <app-eastah-egg />
