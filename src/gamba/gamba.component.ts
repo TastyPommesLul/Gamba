@@ -25,13 +25,14 @@ export class GambaComponent {
     let chance = Math.ceil(Math.random() * 100);
     await Utils.delay(500);
     if (this.give <= this.balance) {
-      if (chance > 60) {
+      if (chance > 95) {
         console.log(chance);
-        this.balance += this.give * 2;
-      }
-      else if (chance >= 99) {
         this.balance += this.give * 10;
         this.error = "You Hit The JackPot!"
+      } else if (chance > 60) {
+        this.error = ""
+        console.log(chance);
+        this.balance += this.give * 2;
       } else {
         console.log(chance);
         this.balance -= this.give / 2;
